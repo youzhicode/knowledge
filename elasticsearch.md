@@ -1,4 +1,4 @@
-###elasticsearch
+### elasticsearch
 ✅ Elasticsearch is a near real time search platform
 ✅ Elasticsearch security features have been automatically configured!
 ✅ Authentication is enabled and cluster connections are encrypted.
@@ -25,7 +25,7 @@
   ⁃ Start Elasticsearch with `bin/elasticsearch --enrollment-token <token>`, using the enrollment token that you generated.
 
 
-####源码安装完成之后设置的几个点：
+#### 源码安装完成之后设置的几个点：
 > 修改密码: 修改默认密码：必须在elasticsearch服务启动的情况下对密码进行重置/重设操作.重置:'bin/elasticsearch-reset-password -u xxxxx' xxxx 表示用户名   重设: 'bin/elasticsearch-reset-password -u xxxxx -i' 需要用户自定义密码输入
 >
 > 设置环境变量ES_HOME:修改/etc/profile
@@ -37,12 +37,12 @@
   + 配置config目录路径，默认存在$ES_HOME/config  可以通过ES_PATH_CONF自定义
 
 
-####常见问题
+#### 常见问题
 >received plaintext http traffic on an https channel, closing connection Netty4HttpChannel
 >>启动elasticsearch时，由于es开启了安全认证，所以输入http://localhost:9200会出现以上报错信息，需要在config/elasticsearch.ymal配置文件中将安全认证关闭:xpack.security.http.ssl下面的enabled:false
 
 
-####操作演示
+#### 操作演示
 >查看集群健康状态:curl --user elastic:12345678 http://127.0.0.1:9200/_cat/health?v
 - 集群健康状态的三种颜色:
     * green everything is good(cluster is fully functional)
