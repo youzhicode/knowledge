@@ -1,3 +1,13 @@
+# Elasticsearch
+`Elasticsearch 学习知识图谱，根据8.8版本翻译整理`
+## Index Modules
+`Index Moduels 是一个管理，控制，索引已经创建好的索引的模块`
+### Index Settings
+`可以为每一个索引设置一个等级`
+
+
+
+
 ### elasticsearch
 > Elasticsearch is a near real time search platform
 > Elasticsearch security features have been automatically configured!
@@ -52,11 +62,23 @@
 
 - 查看节点状态: curl --user elastic:12345678 http://127.0.0.1:9200/_cat/nodes?v
 - 查看节点所有indices: curl --user elastic:12345678 http://127.0.0.1:9200/_cat/indices?v
-- 创建一个index: curl --user elastic:12345678 -X PUT http://127.0.0.1:9200/customer?pretty   customer是index名字
+- 创建一个index: curl --user elastic:12345678 -X PUT http://127.0.0.1:9200/customer?pretty   customer是index名字   参数pretty用于美化输出
+- 创建一个document: curl --user elastic:12345678 -X PUT http://localhost:9200/customer/_doc/1?pretty -d '{"name":"John Doe"}' -H "Content-Type: Application/Json"
+- 查询一个document：curl --user elastic:12345678 -X GET http://localhost:9200/customer/_doc/1?pretty
+- 删除一个index：curl --user elastic:12345678 -X DELETE http://localhost:9200/customer?pretty
 
 
->添加一个document
-curl -H "Content-Type: application/json" --user elastic:0crSPN*r26q6Jkf=BLK9 -X POST -d '{"name":"weiki"}' http://127.0.0.1:9200/customer/_doc/1
+#### Modifying Your Data
+>手动指定一个ID添加document：
+    >>curl --user elastic:12345678 -X PUT http://localhost:9200/customer/_doc/1?pretty -d '{"name": "Johe Doe"}' -H "Content-Type: Application/Json"
+
+>如果再次提交相同ID的document，那么会替换已经存在的文档
+    >>curl --user elastic:12345678 -X PUT http://localhost:9200/customer/_doc/1?pretty -d '{"name": "Johe Doe"}' -H "Content-Type: Application/Json"
+
+>不指定ID，创建一个document
+    >>curl --user elastic:12345678 -X POST http://localhost:9200/customer/_doc?pretty -d '{"name": "Johe Doe"}' -H "Content-Type: Application/Json"
+    PS: 这里使用的动词是POST， 因为我们没有使用指定ID
 
 
-#### 数据类型
+#### Updating Document
+> 更新已经存在的文档，Elasticsearch不会真的更新文档，而是删除之后重建
